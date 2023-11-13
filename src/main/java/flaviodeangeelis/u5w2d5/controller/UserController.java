@@ -3,7 +3,6 @@ package flaviodeangeelis.u5w2d5.controller;
 import flaviodeangeelis.u5w2d5.entities.User;
 import flaviodeangeelis.u5w2d5.exception.BadRequestException;
 import flaviodeangeelis.u5w2d5.exception.NotFoundException;
-import flaviodeangeelis.u5w2d5.payload.NewUserDTO;
 import flaviodeangeelis.u5w2d5.payload.UpdateUserDTO;
 import flaviodeangeelis.u5w2d5.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,21 +33,6 @@ public class UserController {
         return usersService.findById(id);
     }
 
-    @PostMapping("")
-    @ResponseStatus(HttpStatus.CREATED)
-    public User save(@RequestBody @Validated NewUserDTO body, BindingResult validation) {
-        if (validation.hasErrors()) {
-            throw new BadRequestException(validation.getAllErrors());
-        } else {
-            try {
-                return usersService.save(body);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-
-        }
-
-    }
 
     @PutMapping("/update/{id}")
     public User findByIdAndUpdate(@PathVariable int id, @RequestBody @Validated UpdateUserDTO body, BindingResult validation) {

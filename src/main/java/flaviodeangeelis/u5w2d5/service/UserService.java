@@ -76,4 +76,9 @@ public class UserService {
         userRepository.save(found);
         return imgURL;
     }
+
+    public User findByEmail(String email) {
+        return userRepository.findByEmail(email)
+                .orElseThrow(() -> new NotFoundException("Utente con email " + email + " non trovato!"));
+    }
 }
